@@ -10,26 +10,44 @@ from gymnasium.wrappers import TimeLimit
 TURBO_XML = """
 <mujoco model="TurboV1">
   <compiler angle="degree" coordinate="local"/>
-  <option timestep="0.02" />
+  <option timestep="0.01"/>
 
   <default>
     <joint armature="0.01" damping="1" limited="true"/>
   </default>
 
-  <asset>
-  <hfield name="track_hf" file="/Users/venky/Documents/Projects/DRL_TurboEngine/DRL_TurboEngineV2/Tracks_PNG/TrackV1.png" size="50 50 5 0.1"/>
-  </asset>
-
   <worldbody>
-    <geom name="ground Plane" type="plane" pos="0 0 0" size="90 90 1" rgba="1 1 1 1" contype="1" conaffinity="1"/> 
-    <geom name="wall_boundary1" type="box" pos="90 0 5" size="0.5 90 5" rgba="0.7 0.7 0.7 1" contype="1" conaffinity="1"/>
-    <geom name="wall_boundary2" type="box" pos="-90 0 5" size="0.5 90 5" rgba="0.7 0.7 0.7 1" contype="1" conaffinity="1"/>
-    <geom name="wall_boundary3" type="box" pos="0 -90 5" size="90 0.5 5" rgba="0.7 0.7 0.7 1" contype="1" conaffinity="1"/>
-    <geom name="wall_boundary4" type="box" pos="0 90 5" size="90 0.5 5" rgba="0.7 0.7 0.7 1" contype="1" conaffinity="1"/>
+    <geom name="ground" type="plane" pos="0 0 0" size="50 50 1" rgba="1 1 1 1"/>
+    <geom name="wall_front" type="box" pos="50 0 5" size="0.5 50 5" rgba="0.7 0.7 0.7 1"/>
+    <geom name="wall_back"  type="box" pos="-50 0 5" size="0.5 50 5" rgba="0.7 0.7 0.7 1"/>
+    <geom name="wall_left"  type="box" pos="0 -50 5" size="50 0.5 5" rgba="0.7 0.7 0.7 1"/>
+    <geom name="wall_right" type="box" pos="0 50 5" size="50 0.5 5" rgba="0.7 0.7 0.7 1"/>
 
-    <geom name="track_geom" type="hfield" hfield="track_hf" pos="0 -7.5 -0.5"/>
+    <geom name="track11"  type="box" pos="0 -1.5 0" size="9.5 0.1 0.5" rgba="0.2 0.2 0.2 1"/>
+    <geom name="track12" type="box" pos="0 1.5 0" size="7 0.1 0.5" rgba="0.2 0.2 0.2 1"/>
+    <geom name="track21" type="box" pos="9.5 7.5 0" size="0.1 9 0.5" rgba="0.2 0.2 0.2 2"/>
+    <geom name="track22"  type="box" pos="7 10.5 0" size="0.1 9 0.5" rgba="0.2 0.2 0.2 1"/>
+    <geom name="track31" type="box" pos="16 22.5 0" size="0.1 9 0.5" euler="0 0 -45" rgba="0.2 0.2 0.2 2"/>
+    <geom name="track32"  type="box" pos="13 23.5 0" size="0.1 7.5 0.5" euler="0 0 -52" rgba="0.2 0.2 0.2 1"/>
+    <geom name="track41" type="box" pos="14 37 0" size="0.1 12 0.5" euler="0 0 45" rgba="0.2 0.2 0.2 2"/>
+    <geom name="track42"  type="box" pos="12 35 0" size="0.1 9 0.5" euler="0 0 45" rgba="0.2 0.2 0.2 1"/>
+    <geom name="track51"  type="box" pos="-3.5 41.5 0" size="9.5 0.1 0.5" rgba="0.2 0.2 0.2 1"/>
+    <geom name="track52" type="box" pos="-4.5 45 0" size="11 0.1 0.5" rgba="0.2 0.2 0.2 1"/>
+    <geom name="track61" type="box" pos="-15.5 35 0" size="0.1 9 0.5" rgba="0.2 0.2 0.2 2"/>
+    <geom name="track62"  type="box" pos="-13 32 0" size="0.1 9 0.5" rgba="0.2 0.2 0.2 1"/>
+    <geom name="track7" type="box" pos="-16.5 23 0" size="4 0.1 0.5" rgba="0.2 0.2 0.2 1"/>
+    <geom name="track8"  type="box" pos="-20.5 32 0" size="0.1 9 0.5" rgba="0.2 0.2 0.2 1"/>
+    <geom name="track91"  type="box" pos="-23.5 45 0" size="19.5 0.1 0.5" rgba="0.2 0.2 0.2 1"/>
+    <geom name="track92"  type="box" pos="-35.5 41.5 0" size="15.5 0.1 0.5" rgba="0.2 0.2 0.2 1"/>
+    <geom name="track10" type="box" pos="18 41 0" size="0.1 12 0.5" euler="0 0 45" rgba="0.2 0.2 0.2 2"/>
+    <geom name="track111" type="box" pos="19 13 0" size="0.1 22 0.5" euler="0 0 -25" rgba="0.2 0.2 0.2 2"/>
+    <geom name="track112" type="box" pos="16 13 0" size="0.1 17 0.5" euler="0 0 -25" rgba="0.2 0.2 0.2 2"/>
+    <geom name="track121"  type="box" pos="-7 -6 0" size="18 0.1 0.5" rgba="0.2 0.2 0.2 1"/>
+    <geom name="track131"  type="box" pos="-15 -1.5 0" size="10 0.1 0.5" rgba="0.2 0.2 0.2 1"/>
+    <geom name="track132" type="box" pos="-15 1.5 0" size="14 0.1 0.5" rgba="0.2 0.2 0.2 1"/>
+    <geom name="track141" type="box" pos="-28 -2 0" size="0.1 5 0.5" euler="0 0 26" rgba="0.2 0.2 0.2 2"/>
 
-    <body name="chassis" pos="0 0 0">
+    <body name="chassis" pos="0 0 0.5">
       <geom name="chassis_geom" type="box" size="0.3 0.15 0.05" rgba="0.3 0.3 0.3 1" mass="100"/>
       <joint name="chassis_free" type="free"/>
 
@@ -43,12 +61,12 @@ TURBO_XML = """
 
       <body name="rear_left" pos="-0.3 -0.25 0" euler="90 0 0">
         <joint name="rear_left_axle" type="hinge" axis="0 0 1" limited="false"/>
-        <geom name="rear_left_wheel" type="cylinder" size="0.08 0.04" rgba="0.7 0.7 0.7 1" mass="20" contype="1" conaffinity="1"/>
+        <geom name="rear_left_wheel" type="cylinder" size="0.08 0.04" rgba="0.7 0.7 0.7 1" mass="20"/>
       </body>
 
       <body name="rear_right" pos="-0.3 0.25 0" euler="90 0 0">
         <joint name="rear_right_axle" type="hinge" axis="0 0 1" limited="false"/>
-        <geom name="rear_right_wheel" type="cylinder" size="0.08 0.04" rgba="0.7 0.7 0.7 1" mass="20" contype="1" conaffinity="1"/>
+        <geom name="rear_right_wheel" type="cylinder" size="0.08 0.04" rgba="0.7 0.7 0.7 1" mass="20"/>
       </body>
 
       <body name="front_left_mount" pos="0.3 -0.25 0" euler="0 90 0">
@@ -56,7 +74,7 @@ TURBO_XML = """
         <joint name="front_left_steer" type="hinge" axis="1 0 0" limited="true" range="-20 20"/>
         <body name="front_left" pos="0 0 0" euler="90 0 0">
           <joint name="front_left_axle" type="hinge" axis="0 0 1" limited="false"/>
-          <geom name="front_left_wheel" type="cylinder" size="0.08 0.04" rgba="0.7 0.7 0.7 1" mass="20" friction="1 10 1" condim="1" contype="1" conaffinity="1"/>
+          <geom name="front_left_wheel" type="cylinder" size="0.08 0.04" rgba="0.7 0.7 0.7 1" mass="20" friction="1 10 1" condim="1"/>
         </body>
       </body>
 
@@ -65,25 +83,26 @@ TURBO_XML = """
         <joint name="front_right_steer" type="hinge" axis="1 0 0" limited="true" range="-20 20"/>
         <body name="front_right" pos="0 0 0" euler="90 0 0">
           <joint name="front_right_axle" type="hinge" axis="0 0 1" limited="false"/>
-          <geom name="front_right_wheel" type="cylinder" size="0.08 0.04" rgba="0.7 0.7 0.7 1" mass="20" friction="1 10 1" condim="1" contype="1" conaffinity="1"/>
+          <geom name="front_right_wheel" type="cylinder" size="0.08 0.04" rgba="0.7 0.7 0.7 1" mass="20" friction="1 10 1" condim="1"/>
         </body>
       </body>
     </body>
   </worldbody>
 
   <tendon>
-    <fixed name="rear_axles">
-      <joint joint="rear_left_axle" coef="1"/>
-      <joint joint="rear_right_axle" coef="1"/>
-    </fixed>
-    <fixed name="front_steer">
-      <joint joint="front_left_steer" coef="1"/>
-      <joint joint="front_right_steer" coef="1"/>
-    </fixed>
-  </tendon>
+      <fixed name="rear_axles">
+        <joint joint="rear_left_axle" coef="1"/>
+        <joint joint="rear_right_axle" coef="1"/>
+      </fixed>
+
+      <fixed name="front_steer">
+        <joint joint="front_left_steer" coef="1"/>
+        <joint joint="front_right_steer" coef="1"/>
+      </fixed>
+   </tendon>
 
   <actuator>
-    <motor name="rear_drive" tendon="rear_axles" gear="-30" ctrlrange="0 1"/>
+    <motor name="rear_drive" tendon="rear_axles" gear="-6" ctrlrange="0 1"/>
     <position name="front_steer_ctrl" tendon="front_steer" kp="100" ctrlrange="-1 1"/>
   </actuator>
 
@@ -249,7 +268,7 @@ if __name__ == "__main__":
 
         obs, reward, terminated, truncated, info = env.step(action)
         env.render()
-        time.sleep(0.01)
+        #time.sleep(0.01)
         reward_total += reward
 
         print(f"Step {i+1}: "

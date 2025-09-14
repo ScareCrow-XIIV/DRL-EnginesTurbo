@@ -235,7 +235,7 @@ if __name__ == '__main__':
         max_ep_len=35000,
         reset_noise=0,
         model_save_path='/Users/venky/Documents/Projects/DRL_TurboEngine/' \
-        'DRL_TurboEngineV2/SAC_TrainedWeights/SAC_TrainedWeights_TR1.pth',
-        resume_path='/Users/venky/Documents/Projects/DRL_TurboEngine/' \
-        'DRL_TurboEngineV2/SAC_TrainedWeights/SAC_TrainedWeights_TR1_epoch11.pth',
-        resume_full=False)
+        'DRLTurboEngines/DRL_TurboEngineV2/SAC_TrainedWeights',
+        #resume_path='/Users/venky/Documents/Projects/DRL_TurboEngine/' \
+        #'DRLTurboEngines/DRL_TurboEngineV2/SAC_TrainedWeights',
+        resume_full=True)

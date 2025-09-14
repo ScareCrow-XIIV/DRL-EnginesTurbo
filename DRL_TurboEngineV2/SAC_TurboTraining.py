@@ -41,13 +41,33 @@ class ReplayBuffer:
                      rew=self.rew_buf[idxs],
                      done=self.done_buf[idxs])
         return {k: torch.as_tensor(v, dtype=torch.float32) for k, v in batch.items()}
+    
+    def state_dict(self):
+        return dict(obs_buf=self.obs_buf,
+                    obs2_buf=self.obs2_buf,
+                    act_buf=self.act_buf,
+                    rew_buf=self.rew_buf,
+                    done_buf=self.done_buf,
+                    ptr=self.ptr,
+                    size=self.size,
+                    max_size=self.max_size)
+
+    def load_state_dict(self, state_dict):
+        self.obs_buf = state_dict["obs_buf"]
+        self.obs2_buf = state_dict["obs2_buf"]
+        self.act_buf = state_dict["act_buf"]
+        self.rew_buf = state_dict["rew_buf"]
+        self.done_buf = state_dict["done_buf"]
+        self.ptr = state_dict["ptr"]
+        self.size = state_dict["size"]
+        self.max_size = state_dict["max_size"]
 
 
 def sac(env_name=TurboRaceEnv, actor_critic=SAC_TurboCore.MLPActorCritic, ac_kwargs=dict(),
         seed=10, steps_per_epoch=8000, epochs=100, replay_size=int(1e6), gamma=0.99,
         polyak=0.995, pi_lr=1e-3, q_lr=1e-3, alpha=0.2, batch_size=100, start_steps=10000,
         update_after=1000, update_every=50, max_ep_len=1000, reset_noise=0.1,
-        model_save_path='droneWeights.pth'):
+        model_save_path='droneWeights.pth', resume_path=None):
 
     torch.manual_seed(seed)
     np.random.seed(seed)
@@ -67,6 +87,31 @@ def sac(env_name=TurboRaceEnv, actor_critic=SAC_TurboCore.MLPActorCritic, ac_kwa
     q_optimizer = Adam(q_params, lr=q_lr)
 
     replay_buffer = ReplayBuffer(obs_dim=obs_dim, act_dim=act_dim, size=replay_size)
+
+    start_epoch = 0
+
+    # ---------------- Resume logic ----------------
+    if resume_path is not None and os.path.exists(resume_path):
+        print(f"Resuming training from checkpoint: {resume_path}")
+        checkpoint = torch.load(resume_path, map_location="cpu", weights_only=False)
+
+        ac.pi.load_state_dict(checkpoint["pi"])
+        ac.q1.load_state_dict(checkpoint["q1"])
+        ac.q2.load_state_dict(checkpoint["q2"])
+        ac_targ.q1.load_state_dict(checkpoint["q1_targ"])
+        ac_targ.q2.load_state_dict(checkpoint["q2_targ"])
+        pi_optimizer.load_state_dict(checkpoint["pi_optimizer"])
+        q_optimizer.load_state_dict(checkpoint["q_optimizer"])
+        start_epoch = checkpoint.get("epoch", 0)
+
+        # Load replay buffer if available
+        if "replay_buffer" in checkpoint:
+            replay_buffer.load_state_dict(checkpoint["replay_buffer"])
+            print(f"Replay buffer restored with {replay_buffer.size} transitions.")
+
+        print(f"Successfully resumed from epoch {start_epoch}")
+    else:
+        print("Starting training from scratch")
 
     def compute_loss_q(data):
         o, a, r, o2, d = data['obs'], data['act'], data['rew'], data['obs2'], data['done']
@@ -175,17 +220,14 @@ def sac(env_name=TurboRaceEnv, actor_critic=SAC_TurboCore.MLPActorCritic, ac_kwa
                 "q2_targ": ac_targ.q2.state_dict(),
                 "pi_optimizer": pi_optimizer.state_dict(),
                 "q_optimizer": q_optimizer.state_dict(),
-                "epoch": epoch
-            }
-            torch.save(checkpoint, epoch_model_path)
-            print(f"Saved checkpoint: {epoch_model_path}")
-
+                "epoch": epoch,
+                "replay_buffer": replay_buffer.state_dict()}
     env.close()
 
 
 if __name__ == '__main__':
     sac(seed=0,
-        steps_per_epoch=100000,
+        steps_per_epoch=3000,
         epochs=50,
         replay_size=int(1e6),
         gamma=0.99,
@@ -194,10 +236,12 @@ if __name__ == '__main__':
         q_lr=1e-3,
         alpha=0.2,
         batch_size=512,
-        start_steps=30000,
-        update_after=10000,
-        update_every=50,
-        max_ep_len=35000,
+        start_steps=700,
+        update_after=100,
+        update_every=10,
+        max_ep_len=1000,
         reset_noise=0,
         model_save_path='/Users/venky/Documents/Projects/DRL_TurboEngine/' \
-        'DRL_TurboEngineV2/SAC_TrainedWeights/SAC_TrainedWeights_TR1.pth')
+        'DRLTurboEngines/DRL_TurboEngineV2/SAC_TrainedWeights/SAC_TrainedWeights_TR1.pth',
+        resume_path='/Users/venky/Documents/Projects/DRL_TurboEngine'
+        '/DRLTurboEngines/DRL_TurboEngineV2/SAC_TrainedWeights')

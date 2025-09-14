@@ -19,6 +19,7 @@ def add_action_noise(action, noise_scale, action_space):
 
 
 def load_policy(ac, model_path):
+    # In PyTorch >=2.6, explicitly disable weights_only so replay buffer dict loads
     checkpoint = torch.load(model_path, map_location=torch.device("cpu"), weights_only=False)
 
     if isinstance(checkpoint, dict):
@@ -26,9 +27,11 @@ def load_policy(ac, model_path):
             ac.pi.load_state_dict(checkpoint["pi"])
             print("Loaded policy from full SAC checkpoint.")
         else:
+            # If checkpoint is just the actor state_dict
             ac.pi.load_state_dict(checkpoint)
             print("Loaded plain policy weights.")
 
+        # Ignore replay buffer and other training-only keys
         if "replay_buffer" in checkpoint:
             print("Note: Checkpoint contains a replay buffer (ignored during deployment).")
     else:
@@ -49,6 +52,8 @@ def test_sac_policy(env_class, reset_noise=0.1, action_noise_scale=0.05,
     try:
         env = env_class(render_mode="human", reset_noise_scale=reset_noise)
         ac = SAC_TurboCore.MLPActorCritic(env.observation_space, env.action_space)
+
+        # Load trained actor from checkpoint
         ac = load_policy(ac, model_path)
 
         print("SAC Policy loaded successfully. Starting testing with action noise...")
@@ -73,7 +78,7 @@ def test_sac_policy(env_class, reset_noise=0.1, action_noise_scale=0.05,
                 ep_len += 1
 
                 env.render()
-                time.sleep(0.01)  
+                # time.sleep(0.01)  # optional slow-down for visualization
 
                 print(f"Step {ep_len}: "
                       f"Lidars: {o[:6]}, "
@@ -110,8 +115,8 @@ def test_sac_policy(env_class, reset_noise=0.1, action_noise_scale=0.05,
 
 if __name__ == '__main__':
     sac_model_path = (
-        '/Users/venky/Documents/Projects/DRL_TurboEngine/DRL_TurboEngineV2'
-        '/SAC_TrainedWeights/SAC_TrainedWeights_TR1_epoch1.pth'
+        '/Users/venky/Documents/Projects/DRL_TurboEngine/DRL_TurboEngineV2/'
+        'SAC_TrainedWeights/SAC_TrainedWeights_TR1_epoch8.pth'
     )
 
     if not os.path.exists(sac_model_path):
@@ -122,4 +127,4 @@ if __name__ == '__main__':
                         reset_noise=0,
                         action_noise_scale=0,
                         model_path=sac_model_path,
-                        num_test_episodes=10)
+                        num_test_episodes=50)
