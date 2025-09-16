@@ -7,7 +7,7 @@ from typing import Optional
 import time
 from gymnasium.wrappers import TimeLimit
 
-TURBO_XML = "/Users/venky/Documents/Projects/DRL_TurboEngine/DRLTurboEngines/DRL_TurboEngine_V1/Tracks_XML/Track_V1.xml"
+TURBO_XML = "/Users/venky/Documents/Projects/DRL_TurboEngine/DRLTurboEngines/DRL_TurboEngine_V1/Tracks_XML/Track_V2.xml"
 
 
 class TurboRaceEnv(gymnasium.Env):
@@ -96,18 +96,18 @@ class TurboRaceEnv(gymnasium.Env):
         vel_x, vel_y = observation[6:8]
         acc_x, acc_y = observation[8:10]
         
-        forward_reward = vel_x * 10       # reward for moving forward
-        lateral_penalty = -abs(vel_y) * 100 # penalize sideways sliding
+        forward_reward = -abs(vel_x) * 10     #IMU in negative direction 
+        lateral_penalty = -abs(vel_y) * 10 
         reward += forward_reward + lateral_penalty
 
         reward += a1*20
         reward += 4
 
-        stall_penalty = -10.0
-        if vel_x < 0.07:
+        stall_penalty = -50.0
+        if abs(vel_x) < 0.1:
             reward += stall_penalty
 
-        if lidar4 >= 4.9 and abs(a2) > 0.05 and vel_x > 0.05:
+        if lidar4 >= 4.9 and abs(a2) > 0.07 and vel_x > 0.2:
             reward += 10
 
         terminated = False
@@ -160,7 +160,7 @@ if __name__ == "__main__":
 
         obs, reward, terminated, truncated, info = env.step(action)
         env.render()
-        time.sleep(0.001)
+        #time.sleep(0.001)
         reward_total += reward
 
         print(f"Step {i+1}: "

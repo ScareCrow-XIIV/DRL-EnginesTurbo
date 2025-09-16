@@ -62,7 +62,7 @@ def test_sac_policy(env_class, reset_noise=0.1, action_noise_scale=0.05,
             ep_len = 0
             done = False
             truncated = False
-            max_steps = 50000
+            max_steps = 25000
 
             print(f"\n--- Running Episode {i+1} ---")
             while not (done or truncated or ep_len >= max_steps):
@@ -75,7 +75,7 @@ def test_sac_policy(env_class, reset_noise=0.1, action_noise_scale=0.05,
                 ep_len += 1
 
                 env.render()
-                # time.sleep(0.01)  # optional slow-down for visualization
+                #time.sleep(0.001)  # optional slow-down for visualization
 
                 print(f"Step {ep_len}: "
                       f"Lidars: {o[:6]}, "
@@ -113,7 +113,8 @@ def test_sac_policy(env_class, reset_noise=0.1, action_noise_scale=0.05,
 if __name__ == '__main__':
     sac_model_path = (
         '/Users/venky/Documents/Projects/DRL_TurboEngine/'
-        'DRLTurboEngines/DRL_TurboEngine_V1/SavedWeights/TrainedWeights_TR1_epoch8'
+        'DRLTurboEngines/DRL_TurboEngine_V1/SavedWeights/'
+        'TrainedWeights_TR2_epoch13'
         '.pth'
     )
 
@@ -125,4 +126,4 @@ if __name__ == '__main__':
                         reset_noise=0,
                         action_noise_scale=0,
                         model_path=sac_model_path,
-                        num_test_episodes=10)
+                        num_test_episodes=2)

@@ -59,11 +59,11 @@
   </asset>
 
   <worldbody>
-    <geom name="ground_plane" type="plane" pos="0 0 0" size="90 90 1" rgba="1 1 1 1"/> 
-    <geom name="wall_boundary1" type="box" pos="90 0 5" size="0.5 90 5" rgba="0.7 0.7 0.7 1"/>
-    <geom name="wall_boundary2"  type="box" pos="-90 0 5" size="0.5 90 5" rgba="0.7 0.7 0.7 1"/>
-    <geom name="wall_boundary3"  type="box" pos="0 -90 5" size="90 0.5 5" rgba="0.7 0.7 0.7 1"/>
-    <geom name="wall_boundary4" type="box" pos="0 90 5" size="90 0.5 5" rgba="0.7 0.7 0.7 1"/>
+    <geom name="ground Plane" type="plane" pos="0 0 0" size="90 90 1" rgba="1 1 1 1"/> 
+    <geom name="wall_boundary1" type="box" pos="90 0 5" size="0.5 90 5" rgba="0.7 0.7 0.7 1" contype="1" conaffinity="1"/>
+    <geom name="wall_boundary2"  type="box" pos="-90 0 5" size="0.5 90 5" rgba="0.7 0.7 0.7 1" contype="1" conaffinity="1"/>
+    <geom name="wall_boundary3"  type="box" pos="0 -90 5" size="90 0.5 5" rgba="0.7 0.7 0.7 1" contype="1" conaffinity="1"/>
+    <geom name="wall_boundary4" type="box" pos="0 90 5" size="90 0.5 5" rgba="0.7 0.7 0.7 1" contype="1" conaffinity="1"/>
 
     <geom type="mesh" mesh="L1" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
     <geom type="mesh" mesh="R1" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
@@ -111,10 +111,8 @@
     <geom type="mesh" mesh="L22" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
 
 
-
-
     <body name="chassis" pos="0 0 0.5">
-      <geom name="chassis_geom" type="box" size="0.3 0.15 0.05" rgba="0.3 0.3 0.3 1" mass="100"/>
+      <geom name="chassis_geom" type="box" size="0.3 0.15 0.05" rgba="0.3 0.3 0.3 1" mass="100" contype="1" conaffinity="1"/>
       <joint name="chassis_free" type="free"/>
 
       <site name="ray_site_front" pos="0.3 0 0.1" quat="0.7071 0 -0.7071 0" type="sphere" size="0.05"/>
@@ -123,33 +121,33 @@
       <site name="ray_site_back" pos="-0.3 0 0.1" quat="0 -0.7071 0 -0.7071" type="sphere" size="0.05"/>
       <site name="ray_site_left1" pos="0.125 -0.17 0.1" quat="0.7071 -0.7071 0 0" type="sphere" size="0.05"/>
       <site name="ray_site_left2" pos="-0.125 -0.17 0.1" quat="0.7071 -0.7071 0 0" type="sphere" size="0.05"/>
-      <site name="imu_site" pos="0 0 0.3" size="0.05" rgba="0 1 0 1"/>
+      <site name="imu_site" pos="0 0 0.1" size="0.05" rgba="0 1 0 1"/>
 
-      <body name="rear_left" pos="-0.3 -0.25 0" euler="90 0 0">
+      <body name="rear_left" pos="0.3 -0.25 0" euler="90 0 0">
         <joint name="rear_left_axle" type="hinge" axis="0 0 1" limited="false"/>
-        <geom name="rear_left_wheel" type="cylinder" size="0.08 0.04" rgba="0.7 0.7 0.7 1" mass="20"/>
+        <geom name="rear_left_wheel" type="cylinder" size="0.08 0.04" rgba="0.7 0.7 0.7 1" mass="20" contype="1" conaffinity="1"/>
       </body>
 
-      <body name="rear_right" pos="-0.3 0.25 0" euler="90 0 0">
+      <body name="rear_right" pos="0.3 0.25 0" euler="90 0 0">
         <joint name="rear_right_axle" type="hinge" axis="0 0 1" limited="false"/>
-        <geom name="rear_right_wheel" type="cylinder" size="0.08 0.04" rgba="0.7 0.7 0.7 1" mass="20"/>
+        <geom name="rear_right_wheel" type="cylinder" size="0.08 0.04" rgba="0.7 0.7 0.7 1" mass="20" contype="1" conaffinity="1"/>
       </body>
 
-      <body name="front_left_mount" pos="0.3 -0.25 0" euler="0 90 0">
+      <body name="front_left_mount" pos="-0.3 -0.25 0" euler="0 90 0">
         <inertial pos="0 0 0" mass="0.001" diaginertia="0.001 0.001 0.001"/>
         <joint name="front_left_steer" type="hinge" axis="1 0 0" limited="true" range="-20 20"/>
         <body name="front_left" pos="0 0 0" euler="90 0 0">
           <joint name="front_left_axle" type="hinge" axis="0 0 1" limited="false"/>
-          <geom name="front_left_wheel" type="cylinder" size="0.08 0.04" rgba="0.7 0.7 0.7 1" mass="20" friction="1 10 1" condim="1"/>
+          <geom name="front_left_wheel" type="cylinder" size="0.08 0.04" rgba="0.7 0.7 0.7 1" mass="20" friction="0.1 0.1 0.1" condim="1" contype="1" conaffinity="1"/>
         </body>
       </body>
 
-      <body name="front_right_mount" pos="0.3 0.25 0" euler="0 90 0">
+      <body name="front_right_mount" pos="-0.3 0.25 0" euler="0 90 0">
         <inertial pos="0 0 0" mass="0.001" diaginertia="0.001 0.001 0.001"/>
         <joint name="front_right_steer" type="hinge" axis="1 0 0" limited="true" range="-20 20"/>
         <body name="front_right" pos="0 0 0" euler="90 0 0">
           <joint name="front_right_axle" type="hinge" axis="0 0 1" limited="false"/>
-          <geom name="front_right_wheel" type="cylinder" size="0.08 0.04" rgba="0.7 0.7 0.7 1" mass="20" friction="1 10 1" condim="1"/>
+          <geom name="front_right_wheel" type="cylinder" size="0.08 0.04" rgba="0.7 0.7 0.7 1" mass="20" friction="0.1 0.1 0.1" condim="1" contype="1" conaffinity="1"/>
         </body>
       </body>
     </body>
@@ -168,7 +166,7 @@
    </tendon>
 
   <actuator>
-    <motor name="rear_drive" tendon="rear_axles" gear="-50" ctrlrange="0 1"/>
+    <motor name="rear_drive" tendon="rear_axles" gear="25" ctrlrange="0 1"/>
     <position name="front_steer_ctrl" tendon="front_steer" kp="100" ctrlrange="-1 1"/>
   </actuator>
 
@@ -182,14 +180,4 @@
     <velocimeter name="imu_velocity" site="imu_site"/>
     <accelerometer name="imu_acceleration" site="imu_site"/>
   </sensor>
-  <contact>
-  
-    <pair geom1="rear_left_wheel" geom2="ground_plane"/>
-    <pair geom1="rear_right_wheel" geom2="ground_plane"/>
-    <pair geom1="front_left_wheel" geom2="ground_plane"/>
-    <pair geom1="front_right_wheel" geom2="ground_plane"/>
-    
- 
-  </contact>
 </mujoco>
-

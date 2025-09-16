@@ -225,7 +225,7 @@ def sac(env_name=TurboRaceEnv, actor_critic=TurboCore.MLPActorCritic, ac_kwargs=
 
 if __name__ == '__main__':
     sac(seed=0,
-        steps_per_epoch=75000,
+        steps_per_epoch=100000,
         epochs=50,
         replay_size=int(1e6),
         gamma=0.99,
@@ -233,13 +233,14 @@ if __name__ == '__main__':
         pi_lr=1e-3,
         q_lr=1e-3,
         alpha=0.2,
-        batch_size=256,
-        start_steps=30000,
+        batch_size=512,
+        start_steps=20000,
         update_after=10000,
-        update_every=10,
+        update_every=50,
         max_ep_len=25000,
         reset_noise=0,
-        model_save_path='/Users/venky/Documents/Projects/DRL_TurboEngine'
-        '/DRLTurboEngines/DRL_TurboEngine_V1/SavedWeights/TrainedWeights_TR2.pth',
-        resume_path='/Users/venky/Documents/Projects/DRL_TurboEngine/DRLTurboEngines/DRL_TurboEngine_V1/SavedWeights/TrainedWeights_TR2_epoch29.pth',
+        model_save_path='/Users/venky/Documents/Projects/DRL_TurboEngine/DRLTurboEngines'
+        '/DRL_TurboEngine_V1/SavedWeights/TrainedWeights_TR2.pth',
+        resume_path='/Users/venky/Documents/Projects/DRL_TurboEngine/DRLTurboEngines/DRL_TurboEngine_V1'
+        '/SavedWeights/TrainedWeights_TR1_epoch5.pth',
         resume_full=True)
