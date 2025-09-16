@@ -7,7 +7,7 @@ import os
 import itertools
 from TurboRaceEnvironment import TurboRaceEnv
 import time
-
+from tqdm.tragne import trange
 
 def combined_shape(length, shape=None):
     if shape is None:
@@ -239,7 +239,6 @@ if __name__ == '__main__':
         update_every=10,
         max_ep_len=25000,
         reset_noise=0,
-        model_save_path='/Users/venky/Documents/Projects/DRL_TurboEngine'
-        '/DRLTurboEngines/DRL_TurboEngine_V1/SavedWeights/TrainedWeights_TR2.pth',
-        resume_path='/Users/venky/Documents/Projects/DRL_TurboEngine/DRLTurboEngines/DRL_TurboEngine_V1/SavedWeights/TrainedWeights_TR2_epoch29.pth',
+        model_save_path='/SavedWeights/TrainedWeights_TR1.pth',
+        resume_path='/SavedWeights/TrainedWeights_TR1_epoch29.pth',
         resume_full=True)
