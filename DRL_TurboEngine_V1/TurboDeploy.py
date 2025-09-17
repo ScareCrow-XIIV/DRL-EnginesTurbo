@@ -1,5 +1,6 @@
 import torch
 import TurboCore
+import mujoco
 import time
 import os
 from TurboRaceEnvironment import TurboRaceEnv
@@ -49,7 +50,7 @@ def test_sac_policy(env_class, reset_noise=0.1, action_noise_scale=0.05,
     all_episode_returns = []
 
     try:
-        env = env_class(render_mode="human", reset_noise_scale=reset_noise)
+        env = env_class(render_mode="human", reset_noise_scale=reset_noise)    
         ac = TurboCore.MLPActorCritic(env.observation_space, env.action_space)
         ac = load_policy(ac, model_path)
 
@@ -75,7 +76,12 @@ def test_sac_policy(env_class, reset_noise=0.1, action_noise_scale=0.05,
                 ep_len += 1
 
                 env.render()
-                #time.sleep(0.001)  # optional slow-down for visualization
+                time.sleep(0.01)  
+                if hasattr(env, "viewer") and env.viewer is not None:
+                    env.viewer.cam.type = mujoco.mjtCamera.mjCAMERA_TRACKING
+                    env.viewer.cam.trackbodyid = env.model.body("chassis").id
+                    env.viewer.cam.elevation = -90   
+                    env.viewer.cam.azimuth = -90 
 
                 print(f"Step {ep_len}: "
                       f"Lidars: {o[:6]}, "
