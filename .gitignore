@@ -1,1 +1,2 @@
-SavedWeights/*.pth
+DRL_TurboEngine_V1/SavedWeights/*.pth
+.DS_Store
