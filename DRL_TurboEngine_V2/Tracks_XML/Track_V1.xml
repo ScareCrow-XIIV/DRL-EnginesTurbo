@@ -1,0 +1,108 @@
+<mujoco model="TurboV1">
+
+  <compiler meshdir="/Users/venky/Documents/Projects/DRL_TurboEngine/DRLTurboEngines/DRL_TurboEngine_V1/Tracks_STL/Track_V1"/>
+  <compiler angle="degree" coordinate="local"/>
+  <option timestep="0.01"/>
+
+  <default>
+    <joint armature="0.01" damping="1" limited="true"/>
+  </default>
+
+  <asset>
+    <mesh name="track1" file="Track1.stl" scale="0.2 0.05 0.2"/>
+    <mesh name="track2" file="Track2.stl" scale="0.2 0.05 0.2"/>
+    <mesh name="track3" file="Track3.stl" scale="0.2 0.05 0.2"/>
+    <mesh name="track4" file="Track4.stl" scale="0.2 0.05 0.2"/>
+    <mesh name="track5" file="Track5.stl" scale="0.2 0.05 0.2"/>
+    <mesh name="track6" file="Track6.stl" scale="0.2 0.05 0.2"/>
+    <mesh name="track7" file="Track7.stl" scale="0.2 0.05 0.2"/>
+    <mesh name="track8" file="Track8.stl" scale="0.2 0.05 0.2"/>
+    
+  </asset>
+
+  <worldbody>
+    <geom name="ground Plane" type="plane" pos="0 0 0" size="90 90 1" rgba="1 1 1 1"/> 
+    <geom name="wall_boundary1" type="box" pos="90 0 5" size="0.5 90 5" rgba="0.7 0.7 0.7 1" contype="1" conaffinity="1"/>
+    <geom name="wall_boundary2"  type="box" pos="-90 0 5" size="0.5 90 5" rgba="0.7 0.7 0.7 1" contype="1" conaffinity="1"/>
+    <geom name="wall_boundary3"  type="box" pos="0 -90 5" size="90 0.5 5" rgba="0.7 0.7 0.7 1" contype="1" conaffinity="1"/>
+    <geom name="wall_boundary4" type="box" pos="0 90 5" size="90 0.5 5" rgba="0.7 0.7 0.7 1" contype="1" conaffinity="1"/>
+
+    <geom type="mesh" mesh="track1" xyaxes="1 0 0 0 0 1" pos="0 0 0" contype="1" conaffinity="1"/>
+    <geom type="mesh" mesh="track2" xyaxes="1 0 0 0 0 1" pos="0 0 0" contype="1" conaffinity="1"/>
+    <geom type="mesh" mesh="track3" xyaxes="1 0 0 0 0 1" pos="0 0 0" contype="1" conaffinity="1"/>
+    <geom type="mesh" mesh="track4" xyaxes="1 0 0 0 0 1" pos="0 0 0" contype="1" conaffinity="1"/>
+    <geom type="mesh" mesh="track5" xyaxes="1 0 0 0 0 1" pos="0 0 0" contype="1" conaffinity="1"/>
+    <geom type="mesh" mesh="track6" xyaxes="1 0 0 0 0 1" pos="0 0 0" contype="1" conaffinity="1"/>
+    <geom type="mesh" mesh="track7" xyaxes="1 0 0 0 0 1" pos="0 0 0" contype="1" conaffinity="1"/>
+    <geom type="mesh" mesh="track8" xyaxes="1 0 0 0 0 1" pos="0 0 0" contype="1" conaffinity="1"/>
+
+    <body name="chassis" pos="0 0 0.5">
+      <geom name="chassis_geom" type="box" size="0.3 0.15 0.05" rgba="0.3 0.3 0.3 1" mass="100" contype="1" conaffinity="1"/>
+      <joint name="chassis_free" type="free"/>
+
+      <site name="ray_site_front" pos="0.3 0 0.1" quat="0.7071 0 -0.7071 0" type="sphere" size="0.05"/>
+      <site name="ray_site_right1" pos="0.125 0.17 0.1" quat="0.7071 0.7071 0 0" type="sphere" size="0.05"/>
+      <site name="ray_site_right2" pos="-0.125 0.17 0.1" quat="0.7071 0.7071 0 0" type="sphere" size="0.05"/>
+      <site name="ray_site_back" pos="-0.3 0 0.1" quat="0 -0.7071 0 -0.7071" type="sphere" size="0.05"/>
+      <site name="ray_site_left1" pos="0.125 -0.17 0.1" quat="0.7071 -0.7071 0 0" type="sphere" size="0.05"/>
+      <site name="ray_site_left2" pos="-0.125 -0.17 0.1" quat="0.7071 -0.7071 0 0" type="sphere" size="0.05"/>
+      <site name="imu_site" pos="0 0 0.1" size="0.05" rgba="0 1 0 1"/>
+
+      <body name="rear_left" pos="0.3 -0.25 0" euler="90 0 0">
+        <joint name="rear_left_axle" type="hinge" axis="0 0 1" limited="false"/>
+        <geom name="rear_left_wheel" type="cylinder" size="0.08 0.04" rgba="0.7 0.7 0.7 1" mass="20" contype="1" conaffinity="1"/>
+      </body>
+
+      <body name="rear_right" pos="0.3 0.25 0" euler="90 0 0">
+        <joint name="rear_right_axle" type="hinge" axis="0 0 1" limited="false"/>
+        <geom name="rear_right_wheel" type="cylinder" size="0.08 0.04" rgba="0.7 0.7 0.7 1" mass="20" contype="1" conaffinity="1"/>
+      </body>
+
+      <body name="front_left_mount" pos="-0.3 -0.25 0" euler="0 90 0">
+        <inertial pos="0 0 0" mass="0.001" diaginertia="0.001 0.001 0.001"/>
+        <joint name="front_left_steer" type="hinge" axis="1 0 0" limited="true" range="-20 20"/>
+        <body name="front_left" pos="0 0 0" euler="90 0 0">
+          <joint name="front_left_axle" type="hinge" axis="0 0 1" limited="false"/>
+          <geom name="front_left_wheel" type="cylinder" size="0.08 0.04" rgba="0.7 0.7 0.7 1" mass="20" friction="0.1 0.1 0.1" condim="1" contype="1" conaffinity="1"/>
+        </body>
+      </body>
+
+      <body name="front_right_mount" pos="-0.3 0.25 0" euler="0 90 0">
+        <inertial pos="0 0 0" mass="0.001" diaginertia="0.001 0.001 0.001"/>
+        <joint name="front_right_steer" type="hinge" axis="1 0 0" limited="true" range="-20 20"/>
+        <body name="front_right" pos="0 0 0" euler="90 0 0">
+          <joint name="front_right_axle" type="hinge" axis="0 0 1" limited="false"/>
+          <geom name="front_right_wheel" type="cylinder" size="0.08 0.04" rgba="0.7 0.7 0.7 1" mass="20" friction="0.1 0.1 0.1" condim="1" contype="1" conaffinity="1"/>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <tendon>
+      <fixed name="rear_axles">
+        <joint joint="rear_left_axle" coef="1"/>
+        <joint joint="rear_right_axle" coef="1"/>
+      </fixed>
+
+      <fixed name="front_steer">
+        <joint joint="front_left_steer" coef="1"/>
+        <joint joint="front_right_steer" coef="1"/>
+      </fixed>
+   </tendon>
+
+  <actuator>
+    <motor name="rear_drive" tendon="rear_axles" gear="25" ctrlrange="0 1"/>
+    <position name="front_steer_ctrl" tendon="front_steer" kp="100" ctrlrange="-1 1"/>
+  </actuator>
+
+  <sensor>
+    <rangefinder name="lidar_front" site="ray_site_front" cutoff="5"/>
+    <rangefinder name="lidar_right1" site="ray_site_right1" cutoff="5"/>
+    <rangefinder name="lidar_right2" site="ray_site_right2" cutoff="5"/>
+    <rangefinder name="lidar_back" site="ray_site_back" cutoff="5"/>
+    <rangefinder name="lidar_left1" site="ray_site_left1" cutoff="5"/>
+    <rangefinder name="lidar_left2" site="ray_site_left2" cutoff="5"/>
+    <velocimeter name="imu_velocity" site="imu_site"/>
+    <accelerometer name="imu_acceleration" site="imu_site"/>
+  </sensor>
+</mujoco>

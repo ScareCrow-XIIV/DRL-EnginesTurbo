@@ -240,7 +240,7 @@ if __name__ == '__main__':
         max_ep_len=25000,
         reset_noise=0,
         model_save_path='/Users/venky/Documents/Projects/DRL_TurboEngine/DRLTurboEngines'
-        '/DRL_TurboEngine_V1/SavedWeights/TrainedWeights_TR1.pth',
+        '/DRL_TurboEngine_V1/SavedWeights/TrainedWeights_TR2.pth',
         resume_path='/Users/venky/Documents/Projects/DRL_TurboEngine/DRLTurboEngines/DRL_TurboEngine_V1'
-        '/SavedWeights/TrainedWeights_TR1_epoch13.pth',
+        '/SavedWeights/TrainedWeights_TR1_epoch5.pth',
         resume_full=True)

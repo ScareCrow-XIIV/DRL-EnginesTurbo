@@ -3,7 +3,7 @@ import mujoco
 import mujoco.viewer
 import time
 
-xml = "/Users/venky/Documents/Projects/DRL_TurboEngine/DRLTurboEngines/DRL_TurboEngine_V1/Tracks_XML/Track_V1.xml"
+xml = "/Users/venky/Documents/Projects/DRL_TurboEngine/DRLTurboEngines/DRL_TurboEngine_V1/Tracks_XML/Track_V0.xml"
 
 model = mujoco.MjModel.from_xml_path(xml)
 data = mujoco.MjData(model)

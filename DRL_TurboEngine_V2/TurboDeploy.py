@@ -118,8 +118,10 @@ def test_sac_policy(env_class, reset_noise=0.1, action_noise_scale=0.05,
 
 if __name__ == '__main__':
     sac_model_path = (
-        '//Users/venky/Documents/Projects/DRL_TurboEngine/DRLTurboEngines/'
-        'DRL_TurboEngine_V1/SavedWeights/TrainedWeights_TR1_epoch13.pth'
+        '/Users/venky/Documents/Projects/DRL_TurboEngine/'
+        'DRLTurboEngines/DRL_TurboEngine_V1/SavedWeights/'
+        'TrainedWeights_TR2_epoch13'
+        '.pth'
     )
 
     if not os.path.exists(sac_model_path):
