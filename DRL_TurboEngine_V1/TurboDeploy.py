@@ -75,7 +75,7 @@ def test_sac_policy(env_class, reset_noise=0.1, action_noise_scale=0.05,
                 ep_len += 1
 
                 env.render()
-                # time.sleep(0.01)  # optional slow-down for visualization
+                time.sleep(0.02)  # optional slow-down for visualization
 
                 print(f"Step {ep_len}: "
                       f"Lidars: {o[:6]}, "
@@ -112,9 +112,7 @@ def test_sac_policy(env_class, reset_noise=0.1, action_noise_scale=0.05,
 
 if __name__ == '__main__':
     sac_model_path = (
-        '/Users/venky/Documents/Projects/DRL_TurboEngine/'
-        'DRLTurboEngines/DRL_TurboEngine_V1/SavedWeights/TrainedWeights_TR1_epoch8'
-        '.pth'
+        'SavedWeights/TrainedWeights_TR1_epoch1.pth'
     )
 
     if not os.path.exists(sac_model_path):

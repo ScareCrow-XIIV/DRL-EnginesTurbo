@@ -7,7 +7,7 @@ import os
 import itertools
 from TurboRaceEnvironment import TurboRaceEnv
 import time
-from tqdm.tragne import trange
+from tqdm import trange
 
 def combined_shape(length, shape=None):
     if shape is None:
@@ -164,7 +164,7 @@ def sac(env_name=TurboRaceEnv, actor_critic=TurboCore.MLPActorCritic, ac_kwargs=
     print(f"Starting SAC training for {epochs} epochs, with {steps_per_epoch} steps per epoch.")
     print("-"*100)
 
-    for t in range(start_step, total_env_steps):
+    for t in trange(start_step, total_env_steps, desc="Training Progress"):
         current_epoch = (t + 1) // steps_per_epoch + 1
         if current_epoch == epochs and (t + 1) % steps_per_epoch == 0 and env.render_mode != 'human':
             env.close()
@@ -226,7 +226,7 @@ def sac(env_name=TurboRaceEnv, actor_critic=TurboCore.MLPActorCritic, ac_kwargs=
 if __name__ == '__main__':
     sac(seed=0,
         steps_per_epoch=75000,
-        epochs=50,
+        epochs=6,
         replay_size=int(1e6),
         gamma=0.99,
         polyak=0.995,
@@ -239,6 +239,6 @@ if __name__ == '__main__':
         update_every=10,
         max_ep_len=25000,
         reset_noise=0,
-        model_save_path='/SavedWeights/TrainedWeights_TR1.pth',
-        resume_path='/SavedWeights/TrainedWeights_TR1_epoch29.pth',
+        model_save_path='SavedWeights/TrainedWeights_TR1.pth',
+        resume_path='SavedWeights/TrainedWeights_TR1_epoch1.pth',
         resume_full=True)

@@ -7,7 +7,7 @@ from typing import Optional
 import time
 from gymnasium.wrappers import TimeLimit
 
-TURBO_XML = "/Tracks_XML/Track_V2.xml"
+TURBO_XML = "DRL_TurboEngine_V1/Tracks_XML/Track_V2.xml"
 
 
 class TurboRaceEnv(gymnasium.Env):
