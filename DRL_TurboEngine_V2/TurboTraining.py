@@ -241,5 +241,5 @@ if __name__ == '__main__':
         model_save_path='/Users/venky/Documents/Projects/DRL_TurboEngine/DRLTurboEngines'
         '/DRL_TurboEngine_V2/SavedWeights/TrainedWeights_TR2.pth',
         resume_path='/Users/venky/Documents/Projects/DRL_TurboEngine/DRLTurboEngines/DRL_TurboEngine_V2'
-        '/SavedWeights/TrainedWeights_TR2_epoch12.pth',
+        '/SavedWeights/TrainedWeights_TR2_epoch2.pth',
         resume_full=True)
