@@ -16,8 +16,8 @@ class TurboRaceEnv(gymnasium.Env):
     def __init__(self, xml_string: str = TURBO_XML,
                  render_mode: Optional[str] = None,
                  frame_skip: int = 5,
-                 goal_x: float = -10.0,
-                 goal_y: float = 0.0):
+                 goal_x: float = -30.0,
+                 goal_y: float = 30.0):
         super().__init__()
         
         self.model = mujoco.MjModel.from_xml_path(xml_string)
@@ -29,7 +29,7 @@ class TurboRaceEnv(gymnasium.Env):
         self.steps_to_goal = 0
         
         self.goal_xy = np.array([goal_x, goal_y], dtype=np.float64)
-        self.goal_radius = 1
+        self.goal_radius = 5
         self.goal_reward = 1000000.0
         
         self.observation_space = spaces.Box(low=-np.inf, high=np.inf, shape=(10,), dtype=np.float64)
@@ -107,14 +107,14 @@ class TurboRaceEnv(gymnasium.Env):
 
         min_dis = 0.9
         min_vel = 0.08
-        if min([lidar1, lidar2, lidar3, lidar4, lidar5, lidar6]) < min_dis and vel_x < min_vel:
+        if min([lidar1, lidar2, lidar3, lidar4, lidar5, lidar6]) < min_dis and abs(vel_x) < min_vel:
             terminated = True
             reward = -5000.0
 
         goal_distance = np.linalg.norm(np.array([x, y]) - self.goal_xy)
         if goal_distance <= self.goal_radius:
             terminated = True
-            k = 0.005  
+            k = 0.00005  
             reward += self.goal_reward * np.exp(-k * self.steps_to_goal)
             print(f"Goal reached in {self.steps_to_goal} steps! Reward bonus: {self.goal_reward * np.exp(-k * self.steps_to_goal):.2f}")
 
@@ -141,7 +141,7 @@ class TurboRaceEnv(gymnasium.Env):
 
 
 if __name__ == "__main__":
-    env = TurboRaceEnv(render_mode="human", goal_x=-5.0, goal_y=0.0)
+    env = TurboRaceEnv(render_mode="human", goal_x=-30.0, goal_y=30.0)
     max_steps_of_episode = 30000
     env = TimeLimit(env, max_episode_steps=max_steps_of_episode)
     reward_total = 0

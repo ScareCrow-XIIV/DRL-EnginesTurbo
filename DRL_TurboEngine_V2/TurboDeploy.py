@@ -74,7 +74,7 @@ def test_sac_policy(env_class, action_noise_scale=0.05,
             ep_len = 0
             done = False
             truncated = False
-            max_steps = 25000
+            max_steps = 50000
             print(f"\n--- Running Episode {i+1} ---")
 
             while not (done or truncated or ep_len >= max_steps):
@@ -86,7 +86,7 @@ def test_sac_policy(env_class, action_noise_scale=0.05,
                 ep_ret += r
                 ep_len += 1
                 env.render()
-                #time.sleep(0.01)
+                time.sleep(0.001)
 
                 if hasattr(env, "viewer") and env.viewer is not None:
                     env.viewer.cam.type = mujoco.mjtCamera.mjCAMERA_TRACKING
@@ -133,7 +133,7 @@ def test_sac_policy(env_class, action_noise_scale=0.05,
 if __name__ == '__main__':
     sac_model_path = (
         '/Users/venky/Documents/Projects/DRL_TurboEngine/DRLTurboEngines/DRL_TurboEngine_V2/'
-        'SavedWeights/TrainedWeights_TR2_epoch6.pth'
+        'SavedWeights/TrainedWeights_TR2_epoch22.pth'
     )
     if not os.path.exists(sac_model_path):
         print(f"Error: Model file not found at {sac_model_path}")
@@ -142,5 +142,5 @@ if __name__ == '__main__':
         test_sac_policy(env_class=TurboRaceEnv,
                         action_noise_scale=0,
                         model_path=sac_model_path,
-                        num_test_episodes=5,
+                        num_test_episodes=1,
                         smoothing_alpha=0.2)

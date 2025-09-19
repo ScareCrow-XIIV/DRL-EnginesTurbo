@@ -117,8 +117,7 @@
 
 
 
-
-    <body name="chassis" pos="25 -25 0.5">
+    <body name="chassis" pos="25 -30 0.5" euler="0 0 -90">
       <geom name="chassis_geom" type="box" size="0.3 0.15 0.05" rgba="0.3 0.3 0.3 1" mass="100" contype="1" conaffinity="1"/>
       <joint name="chassis_free" type="free"/>
 
