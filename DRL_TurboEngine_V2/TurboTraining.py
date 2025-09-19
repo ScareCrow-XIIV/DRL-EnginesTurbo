@@ -66,13 +66,13 @@ class ReplayBuffer:
 def sac(env_name=TurboRaceEnv, actor_critic=TurboCore.MLPActorCritic, ac_kwargs=dict(),
         seed=10, steps_per_epoch=8000, epochs=100, replay_size=int(1e6), gamma=0.99,
         polyak=0.995, pi_lr=1e-3, q_lr=1e-3, alpha=0.2, batch_size=100, start_steps=10000,
-        update_after=1000, update_every=50, max_ep_len=1000, reset_noise=0.1,
+        update_after=1000, update_every=50, max_ep_len=1000, 
         model_save_path='droneWeights.pth', resume_path=None, resume_full=False):
 
     torch.manual_seed(seed)
     np.random.seed(seed)
 
-    env = env_name(render_mode="None", reset_noise_scale=reset_noise)
+    env = env_name(render_mode="None")
     obs_dim = env.observation_space.shape
     act_dim = env.action_space.shape[0]
 
@@ -168,7 +168,7 @@ def sac(env_name=TurboRaceEnv, actor_critic=TurboCore.MLPActorCritic, ac_kwargs=
         current_epoch = (t + 1) // steps_per_epoch + 1
         if current_epoch == epochs and (t + 1) % steps_per_epoch == 0 and env.render_mode != 'human':
             env.close()
-            env = env_name(render_mode="human", reset_noise_scale=reset_noise)
+            env = env_name(render_mode="human")
             o, info = env.reset()
 
         if t >= start_steps:
@@ -238,9 +238,8 @@ if __name__ == '__main__':
         update_after=10000,
         update_every=50,
         max_ep_len=25000,
-        reset_noise=0,
         model_save_path='/Users/venky/Documents/Projects/DRL_TurboEngine/DRLTurboEngines'
-        '/DRL_TurboEngine_V1/SavedWeights/TrainedWeights_TR2.pth',
-        resume_path='/Users/venky/Documents/Projects/DRL_TurboEngine/DRLTurboEngines/DRL_TurboEngine_V1'
-        '/SavedWeights/TrainedWeights_TR1_epoch5.pth',
+        '/DRL_TurboEngine_V2/SavedWeights/TrainedWeights_TR2.pth',
+        resume_path='/Users/venky/Documents/Projects/DRL_TurboEngine/DRLTurboEngines/DRL_TurboEngine_V2'
+        '/SavedWeights/TrainedWeights_TR2_epoch13.pth',
         resume_full=True)

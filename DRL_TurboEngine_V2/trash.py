@@ -16,129 +16,111 @@ class TurboRaceEnv(gymnasium.Env):
     def __init__(self, xml_string: str = TURBO_XML,
                  render_mode: Optional[str] = None,
                  frame_skip: int = 5,
-                 reset_noise_scale: float = 0):
-
+                 goal_x: float = -10.0,
+                 goal_y: float = 0.0):
         super().__init__()
-
+        
         self.model = mujoco.MjModel.from_xml_path(xml_string)
         self.data = mujoco.MjData(self.model)
-
+        
         self.frame_skip = frame_skip
-        self.reset_noise_scale = reset_noise_scale
-
-        self.observation_space = spaces.Box(low=-np.inf, high=np.inf, shape=(10,), dtype=np.float64)
-        self.action_space = spaces.Box(low=-1.0, high=1.0, shape=(self.model.nu,), dtype=np.float64)
-
         self.render_mode = render_mode
         self.viewer = None
-
+        self.steps_to_goal = 0
+        
+        self.goal_xy = np.array([goal_x, goal_y], dtype=np.float64)
+        self.goal_radius = 1
+        self.goal_reward = 1000000.0
+        
+        self.observation_space = spaces.Box(low=-np.inf, high=np.inf, shape=(10,), dtype=np.float64)
+        self.action_space = spaces.Box(low=-1.0, high=1.0, shape=(self.model.nu,), dtype=np.float64)
+        
         self.initial_qpos = self.data.qpos.copy()
         self.initial_qvel = self.data.qvel.copy()
-
         self.core_body_id = self.model.body("chassis").id
-        self.steps_to_goal = 0
-
-
 
     def _get_obs(self):
-
         lidar = self.data.sensordata[0:6].copy()
         vel = self.data.sensordata[6:9].copy()[0:2]
         acc = self.data.sensordata[9:12].copy()[0:2]
         return np.concatenate([lidar, vel, acc]).astype(np.float64)
 
-
     def _get_info(self):
         vel = self.data.sensordata[6:9].copy()
         acc = self.data.sensordata[9:12].copy()
         x, y, z = self.data.xpos[self.core_body_id]
-
+        goal_distance = np.linalg.norm(np.array([x, y]) - self.goal_xy)
         return {
             "velocity_magnitude": np.linalg.norm(vel),
             "linear_velocity": vel,
             "acceleration_magnitude": np.linalg.norm(acc),
             "linear_acceleration": acc,
             "chassis_position": np.array([x, y, z], dtype=np.float64), 
-            "chassis_xy": np.array([x, y], dtype=np.float64),  
-            "steps_to_goal": self.steps_to_goal          
+            "chassis_xy": np.array([x, y], dtype=np.float64),
+            "steps_to_goal": self.steps_to_goal,
+            "goal_distance": goal_distance
         }
-
-
 
     def reset(self, seed: Optional[int] = None, options: Optional[dict] = None):
         super().reset(seed=seed)
-
-        noise_qpos = self.initial_qpos + self.np_random.uniform(
-            low=-self.reset_noise_scale, high=self.reset_noise_scale, size=self.model.nq
-        )
-        noise_qvel = self.initial_qvel + self.np_random.uniform(
-            low=-self.reset_noise_scale, high=self.reset_noise_scale, size=self.model.nv
-        )
-
         mujoco.mj_resetData(self.model, self.data)
-        self.data.qpos[:] = noise_qpos
-        self.data.qvel[:] = noise_qvel
+        self.data.qpos[:] = np.zeros_like(self.data.qpos)
+        self.data.qpos[0:3] = np.array([0.0, 0.0, 0.5])  
+        self.data.qvel[:] = np.zeros(self.model.nv)
         mujoco.mj_forward(self.model, self.data)
         self.steps_to_goal = 0
-
         observation = self._get_obs()
         info = self._get_info()
         return observation, info
-   
+
 
     def step(self, action):
         action = np.clip(action, self.action_space.low, self.action_space.high)
         a1, a2 = action[0], action[1]
-
+        
         for _ in range(self.frame_skip):
             self.data.ctrl[:] = action
             mujoco.mj_step(self.model, self.data)
-
         mujoco.mj_forward(self.model, self.data)
 
         observation = self._get_obs()
         info = self._get_info()
 
-        lin_vel_mag = info["velocity_magnitude"]
-        acc_mag = info["acceleration_magnitude"]
-
         reward = 0.0
+        terminated = False
+        truncated = False
 
-        x, y, z = self.data.xpos[self.core_body_id]
         self.steps_to_goal += 1
+        x, y, z = self.data.xpos[self.core_body_id]
 
         lidar1, lidar2, lidar3, lidar4, lidar5, lidar6 = observation[:6]
         vel_x, vel_y = observation[6:8]
         acc_x, acc_y = observation[8:10]
         
-        forward_reward = -abs(vel_x) * 10     #IMU in negative direction 
-        lateral_penalty = -abs(vel_y) * 10 
+        forward_reward = -abs(vel_x) * 10
+        lateral_penalty = -abs(vel_y) * 10
         reward += forward_reward + lateral_penalty
-
-        reward += a1*20
-        reward += 4
-
-        stall_penalty = -50.0
+        
         if abs(vel_x) < 0.1:
-            reward += stall_penalty
-
+            reward -= 50.0
+            
         if lidar4 >= 4.9 and abs(a2) > 0.07 and vel_x > 0.2:
             reward += 10
 
-        terminated = False
-        truncated = False
-
-        termination_penalty = -5000.0
-
         min_dis = 0.9
         min_vel = 0.08
-
-        lidars = [lidar1, lidar2, lidar3, lidar4, lidar5, lidar6]
-
-        if min(lidars) < min_dis and vel_x < min_vel:
+        if min([lidar1, lidar2, lidar3, lidar4, lidar5, lidar6]) < min_dis and vel_x < min_vel:
             terminated = True
-            reward = termination_penalty
-            
+            reward = -5000.0
+
+        goal_distance = np.linalg.norm(np.array([x, y]) - self.goal_xy)
+        if goal_distance <= self.goal_radius:
+            terminated = True
+            k = 0.005  
+            reward += self.goal_reward * np.exp(-k * self.steps_to_goal)
+            print(f"Goal reached in {self.steps_to_goal} steps! Reward bonus: {self.goal_reward * np.exp(-k * self.steps_to_goal):.2f}")
+
+
         return observation, reward, terminated, truncated, info
 
     def render(self):
@@ -159,40 +141,38 @@ class TurboRaceEnv(gymnasium.Env):
             self.viewer.close()
             self.viewer = None
 
-if __name__ == "__main__":
-    env = TurboRaceEnv(render_mode="human")
-    max_steps_0f_episode = 30000
-    env = TimeLimit(env, max_episode_steps=max_steps_0f_episode)
-    reward_total = 0
 
-    unwrapped_env = env.env
+if __name__ == "__main__":
+    env = TurboRaceEnv(render_mode="human", goal_x=-5.0, goal_y=0.0)
+    max_steps_of_episode = 30000
+    env = TimeLimit(env, max_episode_steps=max_steps_of_episode)
+    reward_total = 0
 
     obs, info = env.reset()
 
-    for i in range(max_steps_0f_episode):
-
+    for i in range(max_steps_of_episode):
         action = np.array([1, 0])
-
         obs, reward, terminated, truncated, info = env.step(action)
         env.render()
         time.sleep(0.1)
         reward_total += reward
 
         print(f"Step {i+1}: "
-                f"Lidars: {obs[:6]}, "
-                f"VelX: {obs[6]:.3f}, VelY: {obs[7]:.3f}, "
-                f"AccX: {obs[8]:.3f}, AccY: {obs[9]:.3f}, "
-                f"LinVel Mag: {info['velocity_magnitude']:.3f}, "
-                f"Acc Mag: {info['acceleration_magnitude']:.3f}, "
-                f"ChassisX: {info['chassis_xy'][0]:.3f}, "
-                f"ChassisY: {info['chassis_xy'][1]:.3f}, "
-                f"Steps: {info['steps_to_goal']}, "
-                f"Terminated: {terminated}, Truncated: {truncated}")
-
+              #f"Lidars: {obs[:6]}, "
+              f"VelX: {obs[6]:.3f}, VelY: {obs[7]:.3f}, "
+              f"AccX: {obs[8]:.3f}, AccY: {obs[9]:.3f}, "
+              #f"LinVel Mag: {info['velocity_magnitude']:.3f}, "
+              #f"Acc Mag: {info['acceleration_magnitude']:.3f}, "
+              f"ChassisX: {info['chassis_xy'][0]:.3f}, "
+              f"ChassisY: {info['chassis_xy'][1]:.3f}, "
+              f"GoalDist: {info['goal_distance']:.3f}, "
+              f"Steps: {info['steps_to_goal']}, "
+              f"Terminated: {terminated}, Truncated: {truncated}")
 
         if terminated or truncated:
-            print(f"Environment test: Episode ended after {i+1} steps.")
-            print("Total Reward = ", reward_total)
+            print(f"Episode ended after {i+1} steps. Total Reward = {reward_total}")
             obs, info = env.reset()
+            reward_total = 0
             print("\n--- Resetting Environment ---\n")
+
     env.close()

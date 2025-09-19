@@ -1,6 +1,6 @@
 <mujoco model="TurboV1">
 
-  <compiler meshdir="/Users/venky/Documents/Projects/DRL_TurboEngine/DRLTurboEngines/DRL_TurboEngine_V1/Tracks_STL/Track_V2"/>
+  <compiler meshdir="/Users/venky/Documents/Projects/DRL_TurboEngine/DRLTurboEngines/DRL_TurboEngine_V2/Tracks_STL/Track_V2"/>
   <compiler angle="degree" coordinate="local"/>
   <option timestep="0.01"/>
 
@@ -9,109 +9,22 @@
   </default>
 
   <asset>
-
-    <mesh name="L1" file="L1.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="R1" file="R1.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="R2" file="R2.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="L2" file="L2.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="R3" file="R3.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="L3" file="L3.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="R4" file="R4.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="L4" file="L4.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="R5" file="R5.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="L5" file="L5.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="R6" file="R6.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="L6" file="L6.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="R7" file="R7.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="L7" file="L7.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="R8" file="R8.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="L8" file="L8.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="R9" file="R9.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="L9" file="L9.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="R10" file="R10.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="L10" file="L10.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="R11" file="R11.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="L11" file="L11.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="R12" file="R12.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="L12" file="L12.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="R13" file="R13.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="L13" file="L13.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="R14" file="R14.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="L14" file="L14.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="R15" file="R15.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="L15" file="L15.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="R16" file="R16.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="L16" file="L16.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="R17" file="R17.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="L17" file="L17.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="R18" file="R18.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="L18" file="L18.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="R19" file="R19.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="L19" file="L19.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="R20" file="R20.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="L20" file="L20.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="R21" file="R21.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="L21" file="L21.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="R22" file="R22.stl" scale="0.2 0.05 0.2"/>
-    <mesh name="L22" file="L22.stl" scale="0.2 0.05 0.2"/>
-
-
+    <mesh name="T2" file="2.stl" scale="0.1 0.1 0.1"/>
   </asset>
 
+
   <worldbody>
-    <geom name="ground Plane" type="plane" pos="0 0 0" size="90 90 1" rgba="1 1 1 1"/> 
-    <geom name="wall_boundary1" type="box" pos="90 0 5" size="0.5 90 5" rgba="0.7 0.7 0.7 1" contype="1" conaffinity="1"/>
-    <geom name="wall_boundary2"  type="box" pos="-90 0 5" size="0.5 90 5" rgba="0.7 0.7 0.7 1" contype="1" conaffinity="1"/>
-    <geom name="wall_boundary3"  type="box" pos="0 -90 5" size="90 0.5 5" rgba="0.7 0.7 0.7 1" contype="1" conaffinity="1"/>
-    <geom name="wall_boundary4" type="box" pos="0 90 5" size="90 0.5 5" rgba="0.7 0.7 0.7 1" contype="1" conaffinity="1"/>
-
-    <geom type="mesh" mesh="L1" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="R1" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="R2" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="L2" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="R3" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="L3" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="R4" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="L4" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="R5" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="L5" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="R6" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="L6" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="R7" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="L7" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="R8" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="L8" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="R9" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="L9" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="R10" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="L10" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="R11" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="L11" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="R12" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="L12" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="R13" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="L13" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="R14" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="L14" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="R15" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="L15" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="R16" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="L16" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="R17" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="L17" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="R18" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="L18" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="R19" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="L19" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="R20" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="L20" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="R21" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="L21" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="R22" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
-    <geom type="mesh" mesh="L22" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
+    <geom name="ground Plane" type="plane" pos="0 0 0" size="150 150 1" rgba="1 1 1 1"/> 
+<geom name="wall_boundary1" type="box" pos="150 0 5" size="0.5 150 5" rgba="0.7 0.7 0.7 1" contype="1" conaffinity="1"/>
+<geom name="wall_boundary2" type="box" pos="-150 0 5" size="0.5 150 5" rgba="0.7 0.7 0.7 1" contype="1" conaffinity="1"/>
+<geom name="wall_boundary3" type="box" pos="0 -150 5" size="150 0.5 5" rgba="0.7 0.7 0.7 1" contype="1" conaffinity="1"/>
+<geom name="wall_boundary4" type="box" pos="0 150 5" size="150 0.5 5" rgba="0.7 0.7 0.7 1" contype="1" conaffinity="1"/>
 
 
-    <body name="chassis" pos="0 0 0.5">
+<geom type="mesh" mesh="T2" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
+
+
+    <body name="chassis" pos="100 -100 0.5">
       <geom name="chassis_geom" type="box" size="0.3 0.15 0.05" rgba="0.3 0.3 0.3 1" mass="100" contype="1" conaffinity="1"/>
       <joint name="chassis_free" type="free"/>
 
