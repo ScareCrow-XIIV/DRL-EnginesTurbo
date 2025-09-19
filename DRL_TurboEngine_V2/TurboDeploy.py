@@ -86,7 +86,7 @@ def test_sac_policy(env_class, action_noise_scale=0.05,
                 ep_ret += r
                 ep_len += 1
                 env.render()
-                time.sleep(0.001)
+                #time.sleep(0.001)
 
                 if hasattr(env, "viewer") and env.viewer is not None:
                     env.viewer.cam.type = mujoco.mjtCamera.mjCAMERA_TRACKING
@@ -144,3 +144,5 @@ if __name__ == '__main__':
                         model_path=sac_model_path,
                         num_test_episodes=1,
                         smoothing_alpha=0.2)
+        
+""" epoch 22 """

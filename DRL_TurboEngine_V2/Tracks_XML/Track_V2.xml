@@ -56,6 +56,7 @@
   <mesh name="T46" file="46.stl" scale="0.05 0.05 0.05"/>
   <mesh name="T47" file="47.stl" scale="0.05 0.05 0.05"/>
   <mesh name="T48" file="48.stl" scale="0.05 0.05 0.05"/>
+  <mesh name="T49" file="49.stl" scale="0.05 0.05 0.05"/>
 </asset>
 
 
@@ -114,6 +115,7 @@
 <geom type="mesh" mesh="T46" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
 <geom type="mesh" mesh="T47" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
 <geom type="mesh" mesh="T48" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T49" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
 
 
 

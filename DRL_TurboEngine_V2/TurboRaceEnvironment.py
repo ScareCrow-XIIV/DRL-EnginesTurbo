@@ -98,6 +98,8 @@ class TurboRaceEnv(gymnasium.Env):
         forward_reward = -abs(vel_x) * 10
         lateral_penalty = -abs(vel_y) * 10
         reward += forward_reward + lateral_penalty
+
+        reward += a1*10
         
         if abs(vel_x) < 0.1:
             reward -= 50.0
