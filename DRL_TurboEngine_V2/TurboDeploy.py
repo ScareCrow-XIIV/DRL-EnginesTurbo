@@ -3,7 +3,7 @@ import TurboCore
 import mujoco
 import time
 import os
-from trash import TurboRaceEnv
+from TurboRaceEnvironment import TurboRaceEnv
 import numpy as np
 
 
@@ -133,7 +133,7 @@ def test_sac_policy(env_class, action_noise_scale=0.05,
 if __name__ == '__main__':
     sac_model_path = (
         '/Users/venky/Documents/Projects/DRL_TurboEngine/DRLTurboEngines/DRL_TurboEngine_V2/'
-        'SavedWeights/TrainedWeights_TR2_epoch13.pth'
+        'SavedWeights/TrainedWeights_TR2_epoch2.pth'
     )
     if not os.path.exists(sac_model_path):
         print(f"Error: Model file not found at {sac_model_path}")
