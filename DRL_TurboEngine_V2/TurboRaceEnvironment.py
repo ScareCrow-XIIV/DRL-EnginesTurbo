@@ -64,14 +64,18 @@ class TurboRaceEnv(gymnasium.Env):
     def reset(self, seed: Optional[int] = None, options: Optional[dict] = None):
         super().reset(seed=seed)
         mujoco.mj_resetData(self.model, self.data)
-        self.data.qpos[:] = np.zeros_like(self.data.qpos)
-        self.data.qpos[0:3] = np.array([0.0, 0.0, 0.5])  
-        self.data.qvel[:] = np.zeros(self.model.nv)
+
+        # restore from XML-defined initial state
+        self.data.qpos[:] = self.initial_qpos
+        self.data.qvel[:] = self.initial_qvel
+
         mujoco.mj_forward(self.model, self.data)
         self.steps_to_goal = 0
+
         observation = self._get_obs()
         info = self._get_info()
         return observation, info
+
 
 
     def step(self, action):
@@ -154,7 +158,7 @@ if __name__ == "__main__":
         action = np.array([1, 0])
         obs, reward, terminated, truncated, info = env.step(action)
         env.render()
-        time.sleep(0.1)
+        #time.sleep(0.1)
         reward_total += reward
 
         print(f"Step {i+1}: "
