@@ -9,8 +9,55 @@
   </default>
 
   <asset>
-    <mesh name="T2" file="2.stl" scale="0.1 0.1 0.1"/>
-  </asset>
+  <mesh name="T2" file="2.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T3" file="3.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T4" file="4.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T5" file="5.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T6" file="6.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T7" file="7.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T8" file="8.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T9" file="9.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T10" file="10.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T11" file="11.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T12" file="12.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T13" file="13.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T14" file="14.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T15" file="15.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T16" file="16.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T17" file="17.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T18" file="18.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T19" file="19.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T20" file="20.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T21" file="21.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T22" file="22.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T23" file="23.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T24" file="24.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T25" file="25.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T26" file="26.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T27" file="27.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T28" file="28.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T29" file="29.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T30" file="30.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T31" file="31.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T32" file="32.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T33" file="33.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T34" file="34.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T35" file="35.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T36" file="36.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T37" file="37.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T38" file="38.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T39" file="39.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T40" file="40.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T41" file="41.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T42" file="42.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T43" file="43.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T44" file="44.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T45" file="45.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T46" file="46.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T47" file="47.stl" scale="0.2 0.2 0.2"/>
+  <mesh name="T48" file="48.stl" scale="0.2 0.2 0.2"/>
+</asset>
+
 
 
   <worldbody>
@@ -21,7 +68,55 @@
 <geom name="wall_boundary4" type="box" pos="0 150 5" size="150 0.5 5" rgba="0.7 0.7 0.7 1" contype="1" conaffinity="1"/>
 
 
-<geom type="mesh" mesh="T2" xyaxes="1 0 0 0 0 1" pos="0 0 0"/>
+<geom type="mesh" mesh="T2" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T3" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T4" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T5" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T6" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T7" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T8" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T9" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T10" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T11" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T12" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T13" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T14" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T15" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T16" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T17" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T18" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T19" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T20" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T21" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T22" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T23" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T24" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T25" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T26" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T27" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T28" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T29" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T30" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T31" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T32" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T33" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T34" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T35" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T36" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T37" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T38" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T39" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T40" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T41" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T42" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T43" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T44" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T45" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T46" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T47" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T48" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+
+
 
 
     <body name="chassis" pos="100 -100 0.5">
