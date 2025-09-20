@@ -95,17 +95,17 @@ class TurboRaceEnv(gymnasium.Env):
         vel_x, vel_y = observation[6:8]
         acc_x, acc_y = observation[8:10]
         
-        forward_reward = -abs(vel_x) * 10
+        forward_reward = abs(vel_x) * 15
         lateral_penalty = -abs(vel_y) * 10
         reward += forward_reward + lateral_penalty
 
-        reward += a1*10
+        reward += a1*30
         
         if abs(vel_x) < 0.1:
             reward -= 50.0
             
         if lidar4 >= 4.9 and abs(a2) > 0.07 and vel_x > 0.2:
-            reward += 10
+            reward += 20
 
         min_dis = 0.9
         min_vel = 0.08
