@@ -52,7 +52,7 @@ def load_policy(ac, model_path):
     return ac
 
 
-def test_sac_policy(env_class, action_noise_scale=0.05,
+def test_sac_policy(env_class, action_noise_scale=0.0,
                     model_path='droneWeights.pth', num_test_episodes=10,
                     smoothing_alpha=0.2):
     print(f"Attempting to load SAC policy from: {model_path}")
@@ -133,7 +133,7 @@ def test_sac_policy(env_class, action_noise_scale=0.05,
 if __name__ == '__main__':
     sac_model_path = (
         '/Users/venky/Documents/Projects/DRL_TurboEngine/DRLTurboEngines/DRL_TurboEngine_V2/'
-        'SavedWeights/TrainedWeights_TR2_epoch38.pth'
+        'SavedWeights/TrainedWeights_TR2_epoch12.pth'
     )
     if not os.path.exists(sac_model_path):
         print(f"Error: Model file not found at {sac_model_path}")
@@ -145,4 +145,8 @@ if __name__ == '__main__':
                         num_test_episodes=1,
                         smoothing_alpha=0.2)
         
-""" epoch 22 """
+""" 
+epoch 22 
+epoch 41
+epoch 3
+"""

@@ -32,10 +32,6 @@
   <mesh name="T22" file="22.stl" scale="0.05 0.05 0.05"/>
   <mesh name="T23" file="23.stl" scale="0.05 0.05 0.05"/>
   <mesh name="T24" file="24.stl" scale="0.05 0.05 0.05"/>
-  <mesh name="T25" file="25.stl" scale="0.05 0.05 0.05"/>
-  <mesh name="T26" file="26.stl" scale="0.05 0.05 0.05"/>
-  <mesh name="T27" file="27.stl" scale="0.05 0.05 0.05"/>
-  <mesh name="T28" file="28.stl" scale="0.05 0.05 0.05"/>
   <mesh name="T29" file="29.stl" scale="0.05 0.05 0.05"/>
   <mesh name="T30" file="30.stl" scale="0.05 0.05 0.05"/>
   <mesh name="T31" file="31.stl" scale="0.05 0.05 0.05"/>
@@ -56,7 +52,8 @@
   <mesh name="T46" file="46.stl" scale="0.05 0.05 0.05"/>
   <mesh name="T47" file="47.stl" scale="0.05 0.05 0.05"/>
   <mesh name="T48" file="48.stl" scale="0.05 0.05 0.05"/>
-  <mesh name="T49" file="49.stl" scale="0.05 0.05 0.05"/>
+  <mesh name="T50" file="50.stl" scale="0.05 0.05 0.05"/>
+  <mesh name="T51" file="51.stl" scale="0.05 0.05 0.05"/>
 </asset>
 
 
@@ -91,10 +88,6 @@
 <geom type="mesh" mesh="T22" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
 <geom type="mesh" mesh="T23" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
 <geom type="mesh" mesh="T24" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
-<geom type="mesh" mesh="T25" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
-<geom type="mesh" mesh="T26" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
-<geom type="mesh" mesh="T27" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
-<geom type="mesh" mesh="T28" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
 <geom type="mesh" mesh="T29" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
 <geom type="mesh" mesh="T30" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
 <geom type="mesh" mesh="T31" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
@@ -115,7 +108,9 @@
 <geom type="mesh" mesh="T46" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
 <geom type="mesh" mesh="T47" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
 <geom type="mesh" mesh="T48" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
-<geom type="mesh" mesh="T49" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T50" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+<geom type="mesh" mesh="T51" xyaxes="1 0 0 0 0 1" pos="0 0 0.5"/>
+
 
 
 

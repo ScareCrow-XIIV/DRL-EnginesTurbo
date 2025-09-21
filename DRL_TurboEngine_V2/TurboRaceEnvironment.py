@@ -95,17 +95,12 @@ class TurboRaceEnv(gymnasium.Env):
         vel_x, vel_y = observation[6:8]
         acc_x, acc_y = observation[8:10]
         
-        forward_reward = abs(vel_x) * 15
+        forward_reward = abs(vel_x) * 25
         lateral_penalty = -abs(vel_y) * 10
         reward += forward_reward + lateral_penalty
-
-        reward += a1*30
-        
-        if abs(vel_x) < 0.1:
-            reward -= 50.0
             
-        if lidar4 >= 4.9 and abs(a2) > 0.07 and vel_x > 0.2:
-            reward += 20
+        if lidar4 >= 4.9 and abs(a2) > 0.07 and abs(vel_x) > 0.85:
+            reward += 1000
 
         min_dis = 0.9
         min_vel = 0.08
@@ -116,7 +111,7 @@ class TurboRaceEnv(gymnasium.Env):
         goal_distance = np.linalg.norm(np.array([x, y]) - self.goal_xy)
         if goal_distance <= self.goal_radius:
             terminated = True
-            k = 0.00005  
+            k = 0.0002  
             reward += self.goal_reward * np.exp(-k * self.steps_to_goal)
             print(f"Goal reached in {self.steps_to_goal} steps! Reward bonus: {self.goal_reward * np.exp(-k * self.steps_to_goal):.2f}")
 
