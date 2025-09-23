@@ -95,7 +95,7 @@ def test_sac_policy(env_class, action_noise_scale=0.0,
                     env.viewer.cam.azimuth = -90
 
                 print(f"Step {ep_len}: "
-                            #f"Lidars: {o[:6]}, "
+                            f"Lidars: {o[:6]}, "
                             f"VelX: {o[6]:.3f}, VelY: {o[7]:.3f}, "
                             f"AccX: {o[8]:.3f}, AccY: {o[9]:.3f}, "
                             f"ChassisX: {info['chassis_xy'][0]:.3f}, "
@@ -133,7 +133,7 @@ def test_sac_policy(env_class, action_noise_scale=0.0,
 if __name__ == '__main__':
     sac_model_path = (
         '/Users/venky/Documents/Projects/DRL_TurboEngine/DRLTurboEngines/DRL_TurboEngine_V2/'
-        'SavedWeights/TrainedWeights_TR2_epoch12.pth'
+        'SavedWeights/TrainedWeights_TR2_V1_epoch22.pth'
     )
     if not os.path.exists(sac_model_path):
         print(f"Error: Model file not found at {sac_model_path}")
@@ -142,11 +142,6 @@ if __name__ == '__main__':
         test_sac_policy(env_class=TurboRaceEnv,
                         action_noise_scale=0,
                         model_path=sac_model_path,
-                        num_test_episodes=1,
-                        smoothing_alpha=0.2)
+                        num_test_episodes=2,
+                        smoothing_alpha=0.5)
         
-""" 
-epoch 22 
-epoch 41
-epoch 3
-"""

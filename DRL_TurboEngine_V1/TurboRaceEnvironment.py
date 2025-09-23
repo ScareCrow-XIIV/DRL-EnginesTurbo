@@ -107,7 +107,7 @@ class TurboRaceEnv(gymnasium.Env):
         if abs(vel_x) < 0.1:
             reward += stall_penalty
 
-        if lidar4 >= 4.9 and abs(a2) > 0.07 and vel_x > 0.2:
+        if lidar1 >= 4.9 and abs(a2) < 0.07 and vel_x > 0.2:
             reward += 10
 
         terminated = False
@@ -178,3 +178,5 @@ if __name__ == "__main__":
             obs, info = env.reset()
             print("\n--- Resetting Environment ---\n")
     env.close()
+
+#check the lidar which is oriented to front
