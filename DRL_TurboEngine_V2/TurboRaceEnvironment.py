@@ -111,9 +111,8 @@ class TurboRaceEnv(gymnasium.Env):
         goal_distance = np.linalg.norm(np.array([x, y]) - self.goal_xy)
         if goal_distance <= self.goal_radius:
             terminated = True
-            slope = 200  # per-step penalty
+            slope = 200 
             reward += max(0, self.goal_reward - slope * self.steps_to_goal)
-            reward = reward*100
             print(f"Goal reached in {self.steps_to_goal} steps! Reward: {reward:.2f}")
 
         return observation, reward, terminated, truncated, info
@@ -149,15 +148,15 @@ if __name__ == "__main__":
         action = np.array([1, 0])
         obs, reward, terminated, truncated, info = env.step(action)
         env.render()
-        #time.sleep(0.1)
+        time.sleep(0.01)
         reward_total += reward
 
         print(f"Step {i+1}: "
-              #f"Lidars: {obs[:6]}, "
+              f"Lidars: {obs[:6]}, "
               f"VelX: {obs[6]:.3f}, VelY: {obs[7]:.3f}, "
               f"AccX: {obs[8]:.3f}, AccY: {obs[9]:.3f}, "
-              #f"LinVel Mag: {info['velocity_magnitude']:.3f}, "
-              #f"Acc Mag: {info['acceleration_magnitude']:.3f}, "
+              f"LinVel Mag: {info['velocity_magnitude']:.3f}, "
+              f"Acc Mag: {info['acceleration_magnitude']:.3f}, "
               f"ChassisX: {info['chassis_xy'][0]:.3f}, "
               f"ChassisY: {info['chassis_xy'][1]:.3f}, "
               f"GoalDist: {info['goal_distance']:.3f}, "
