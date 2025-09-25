@@ -178,5 +178,3 @@ if __name__ == "__main__":
             obs, info = env.reset()
             print("\n--- Resetting Environment ---\n")
     env.close()
-
-#check the lidar which is oriented to front
